@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="controller.member.MemberSessionUtils" %>
+
+<%
+// 세션이 존재하고, 속성이 존재하는지 확인
+if (session != null && session.getAttribute(MemberSessionUtils.MEMBER_SESSION_KEY) != null) {
+    // 세션에서 memberId를 가져옴
+    String memberId = (String) session.getAttribute(MemberSessionUtils.MEMBER_SESSION_KEY);
+    out.println("Member ID: " + memberId);
+} else {
+    out.println("Session or attribute not found");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Preview</title>
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style type="text/css">
 html, body {
 	display: flex;
@@ -42,6 +56,7 @@ textarea {
       color: #6F6F6F;
     }
 </style>
+
 <script>
 	function createPost() {
 		if (form.title.value == "") {
@@ -142,9 +157,9 @@ textarea {
 					style="width: 113px; position: absolute; left: 597px; top: 1105px; font-size: 22px; text-align: left; color: #6f6f6f;">
 					비공개</p>
 			</div>
-			<p
-				style="position: absolute; left: 162px; top: 198px; font-size: 40px; font-weight: 700; text-align: left; color: #4a4a4a;">
-				게시글 작성</p>
+			<p style="position: absolute; left: 162px; top: 198px; font-size: 40px; font-weight: 700; text-align: left; color: #4a4a4a;">
+				게시글 작성
+			</p>
 		</div>
 	</form>
 </body>

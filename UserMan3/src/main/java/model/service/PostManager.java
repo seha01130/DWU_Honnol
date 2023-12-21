@@ -46,4 +46,7 @@ public class PostManager {
 	public List<Post> findPostList() throws SQLException {
         return postDAO.findPostList();
     }
+	public int countPostBookmark(Post post, int count) throws SQLException {
+		return postDAO.countPostBookmark(post, count);  
+	}
 }

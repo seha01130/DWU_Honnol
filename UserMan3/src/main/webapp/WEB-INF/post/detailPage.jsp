@@ -7,8 +7,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Preview</title>
+<title>게시글 상세페이지</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 html, body {
 	height: 100%;
@@ -34,6 +35,47 @@ body {
   }
 </style>
 <script>
+$(document).ready(function() {
+    // 페이지 로딩 시 자동으로 Ajax 요청 보내기
+    var memberId = 'seha';// 사용자 아이디 설정 (실제로는 동적으로 설정해야 함)
+    var postId = "${post.postId}";
+    $(".countBookmark").click(function() {
+        var url = '<c:url value="/post/countBookmark"/>' + '?postId=' + postId + '?memberId=' + memberId + '?count=' + 1; 
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            method: 'POST',
+            success: function(response) {
+                console.log('프로필 수정 섹션 로드 성공');
+                //$('#editProfile').html(response);
+            },
+            error: function() {
+                console.error('프로필 수정 섹션을 불러오는 데 실패했습니다.');
+            }
+        });
+    });
+
+});
+function increaseBookmarkCount() {
+    var xhr = new XMLHttpRequest();
+    var url = "/post/countBookmark";
+    var params = "postId=${post.postId}";  // 게시글의 ID 또는 식별자 (실제로는 해당 게시글의 ID를 전달해야 함)
+	var params2 = "count=" + 1;
+	
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 서버 응답 성공 시, 북마크 개수 업데이트
+            var response = JSON.parse(xhr.responseText);
+            document.getElementById("bookmarkCount").innerText = response.bookmarkCount;
+        }
+    };
+
+    xhr.send(params, params2);
+}
 function updatePost() {
     var updateLink = document.createElement('a');
     updateLink.href = "<c:url value='/post/update'><c:param name='postId' value='${post.postId}'/></c:url>";
@@ -49,6 +91,21 @@ function deletePost() {
         deleteLink.click();
     }
 }
+function clickBookmarkOn() {
+	var bookmarkOn = document.getElementById("bookmarkOn");
+	var bookmarkOff = document.getElementById("bookmarkOff");
+	bookmarkOn.style.display = 'none';
+
+	bookmarkOff.style.display = '';
+
+}
+function clickBookmarkOff() {
+	var bookmarkOn = document.getElementById("bookmarkOn");
+	var bookmarkOff = document.getElementById("bookmarkOff");
+	bookmarkOff.style.display = 'none';
+	bookmarkOn.style.display = '';
+}
+
 </script>
 </head>
 <body>
@@ -99,7 +156,19 @@ function deletePost() {
 		</div>
 		
 		<!-- 북마크 표시 -->
-		<div style="width: 71px; height: 30px;">
+		<!-- 북마크 -->
+		<!-- 북마크 이미지 24px로 수정하기 -->
+		<!-- 북마크 전 -->
+		<button id="bookmarkOff" onclick="clickBookmarkOff()" style="position:absolute; width:40px; left: 1620px; top: 190px; border:none; background:#fff;">
+			<img src="${pageContext.request.contextPath}/images/bookmark_off.png" />
+		</button>
+						
+		<!--  북마크 후 -->
+		<button id="bookmarkOn" onclick="clickBookmarkOn()" style="position:absolute; width:40px; left: 1620px; top: 190px; border:none; background:#fff;">			
+			<img src="${pageContext.request.contextPath}/images/bookmark_on.png" />
+		</button>
+		<!-- 
+		<button class="countBookmark" onclick="clickBookmarkOn()" style="width: 71px; height: 30px;">
 			<svg width="30" height="30" viewBox="0 0 30 30" fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 				style="width: 30px; height: 30px; position: absolute; left: 1685px; top: 185px;"
@@ -113,11 +182,12 @@ function deletePost() {
             <clipPath id="clip0_10_131">
 				<rect width="30" height="30" fill="white"></rect></clipPath>
           </defs>
-        </svg>
-			<p
-				style="position: absolute; left: 1727px; top: 186px; font-size: 24px; text-align: left; color: #6a6a6a;">
-				${post.myBookmarks}</p>
-		</div>
+        </svg>-->
+        	<!-- 북마크 개수 표시 -->
+		<p id="bookmarkCount" style="position: absolute; left: 1680px; top: 186px; font-size: 24px; text-align: left; color: #6a6a6a;">
+			${post.myBookmarks}
+		</p>
+		  
 		
 		<!-- 이미지 -->
 		<div style="width: 1458px; height: 430px;">

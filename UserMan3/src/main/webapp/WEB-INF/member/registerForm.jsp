@@ -31,7 +31,7 @@ function userCreate() {
 		form.email.focus();
 		return false;
 	}
-	else {
+/* 	else {
 		 console.log('이메일 중복 확인');
 		    var url = '<c:url value="/member/register/emailCheck"/>' + '?email=' + email;
 
@@ -51,12 +51,12 @@ function userCreate() {
 		        error: function () {
 		            console.error('서버 요청 실패');
 		        }
+
 		    });
 
-		    // 폼 제출을 막음
-		    return false;
-	}
 
+	}
+ */
 	form.submit();
 }
 

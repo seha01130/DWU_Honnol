@@ -147,14 +147,11 @@ public class CreatePostController implements Controller {
             Integer.parseInt(isPublic),
             createDate,
             title,
-//            request.getParameter("image"),
-//            "image",
             filename,
             content,
-//            request.getParameter("memberId"),
             "seha",
             Integer.parseInt(locationId),
-            0  //처음에 게시글 만들때는 북마크 갯수 0개임
+            0 
         );
         
         log.debug("Create Post : {}", post);

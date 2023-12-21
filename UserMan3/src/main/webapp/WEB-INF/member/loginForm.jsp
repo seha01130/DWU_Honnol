@@ -39,18 +39,12 @@
 
 	<form name="form" method="POST" action="<c:url value='/member/login' />" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #fff;">
 		<div style="width: 664px; height: 98px; position: absolute; left: 628px; top: 280px;">
-    		<input type="text" name="memberId" id="myInput" style="width: 664px; height: 98px; position: absolute; left: -1.1px; top: -1.1px; border-radius: 20px; background: #fff; border-width: 1.2px; border-color: #505050;">
-     			<p style="position: absolute; left: 43px; top: 10px; font-size: 26px; text-align: left; color: #505050;">
-      				아이디
-   				</p>
+    		<input type="text" placeHolder="아이디" name="memberId" id="myInput" style="width: 664px; height: 98px; position: absolute; left: -1.1px; top: -1.1px; border-radius: 20px; background: #fff; border-width: 1.2px; border-color: #505050; font-size:20px;">
 		</div>
   		
   		<div style="width: 664px; height: 98px; position: absolute; left: 628px; top: 420px;">
-    		<input type="password" name="password" style="width: 664px; height: 98px; position: absolute; 
-    			left: -1.1px; top: -1.1px; border-radius: 20px; background: #fff; border-width: 1.2px; border-color: #505050;">
-    			<p style="position: absolute; left: 43px; top: 10px; font-size: 26px; text-align: left; color: #505050;">
-      				비밀번호
-    			</p>
+    		<input type="password" placeHolder="비밀번호" name="password" style="width: 664px; height: 98px; position: absolute; 
+    			left: -1.1px; top: -1.1px; border-radius: 20px; background: #fff; border-width: 1.2px; border-color: #505050; font-size:20px;">
   		</div>
   	
   		<!-- 로그인 버튼 -->

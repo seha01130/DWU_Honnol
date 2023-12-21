@@ -37,7 +37,7 @@ public class RequestMapping {
         mappings.put("/post/detailPage", new DetailPostController());
         mappings.put("/post/list", new ListPostController());
         mappings.put("/post/update", new UpdatePostController());
-        
+        mappings.put("/post/countBookmark", new PostBookmarkController());
         mappings.put("/memberInfo/myPage", new MyPageController());
         mappings.put("/member/update", new UpdateMemberController());
         mappings.put("/memberInfo/edit", new EditProfileController());

@@ -126,38 +126,76 @@ public class PostDAO {
      * 전체 게시글 정보를 검색하여 List에 저장 및 반환
      */    
     public List<Post> findPostList() throws SQLException {
-        String sql = "SELECT postId, isPublic, createDate, title, image, content, m.memberName "
-                 + "FROM Post p INNER JOIN Member m ON p.memberId = m.memberId " //memberName 알아내려고 Join함
-                 + "WHERE isPublic = 1";
-        jdbcUtil.setSqlAndParameters(sql, null);      
-      try {
-         ResultSet rs = jdbcUtil.executeQuery();         
-         List<Post> postList = new ArrayList<Post>();
-          // 결과 반복문 처리
-           while (rs.next()) {
-               // Post 객체 생성
-               Post post = new Post(
-                   rs.getInt("postId"),
-                   rs.getInt("isPublic"),
-                   rs.getDate("createDate"),
-                   rs.getString("title"),
-                   rs.getString("image"),
-                   rs.getString("content"),
-                   null, 0, 0, null, null
-               );
+        String sql = "SELECT postId, isPublic, createDate, title, image, content, m.memberId "
+                + "FROM Post p INNER JOIN Member m ON p.memberId = m.memberId ";
 
-               // 리스트에 추가
-               postList.add(post);      
-         }      
-           return postList;
-       } catch (Exception ex) {
-           ex.printStackTrace();
-       } finally {
-           jdbcUtil.close();
-       }
+//        memberId가 null이 아닌 경우에는 해당 사용자의 게시물만 가져오도록 WHERE 조건 추가
+//	    if (memberId != null) {
+//	        sql += " AND p.memberId = ?";
+//	    }
+//	
+//	    jdbcUtil.setSqlAndParameters(sql, (memberId != null) ? new Object[] { memberId } : null);
+        jdbcUtil.setSqlAndParameters(sql, null);
 
-       return null;
-   }
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<Post> postList = new ArrayList<>();
+
+            while (rs.next()) {
+                Post post = new Post(
+                        rs.getInt("postId"),
+                        rs.getInt("isPublic"),
+                        rs.getDate("createDate"),
+                        rs.getString("title"),
+                        rs.getString("image"),
+                        rs.getString("content"),
+                        rs.getString("memberId"),
+                        0, // locationId와 myBookmarks에 대한 데이터는 현재 ResultSet에 없는 것으로 가정
+                        0
+                );
+                postList.add(post);
+            }
+            return postList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new SQLException("게시물 목록을 가져오는 중 오류 발생", ex);
+        } finally {
+            jdbcUtil.close();
+        }
+    }
+//    public List<Post> findPostList() throws SQLException {
+//        String sql = "SELECT postId, isPublic, createDate, title, image, content, m.memberName "
+//                 + "FROM Post p INNER JOIN Member m ON p.memberId = m.memberId " //memberName 알아내려고 Join함
+//                 + "WHERE isPublic = 1";
+//        jdbcUtil.setSqlAndParameters(sql, null);      
+//      try {
+//         ResultSet rs = jdbcUtil.executeQuery();         
+//         List<Post> postList = new ArrayList<Post>();
+//          // 결과 반복문 처리
+//           while (rs.next()) {
+//               // Post 객체 생성
+//               Post post = new Post(
+//                   rs.getInt("postId"),
+//                   rs.getInt("isPublic"),
+//                   rs.getDate("createDate"),
+//                   rs.getString("title"),
+//                   rs.getString("image"),
+//                   rs.getString("content"),
+//                   null, 0, 0, null, null
+//               );
+//
+//               // 리스트에 추가
+//               postList.add(post);      
+//         }      
+//           return postList;
+//       } catch (Exception ex) {
+//           ex.printStackTrace();
+//       } finally {
+//           jdbcUtil.close();
+//       }
+//
+//       return null;
+//   }
     
     /**
      * 기존 작성된 Post 정보를 수정
@@ -183,6 +221,30 @@ public class PostDAO {
         }       
         return 0;
     }
+    
+    /* 북마크 카운트 */
+    public int countPostBookmark(Post post, int count) throws SQLException {
+        String sql = "UPDATE Post "
+                    + "SET myBookmarks=?"
+                    + "WHERE postId=?";
+        Object[] param = new Object[] {
+                post.getMyBookmarks() + count, post.getPostId()};             
+        jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil에 update문과 매개 변수 설정
+            
+        try {               
+            int result = jdbcUtil.executeUpdate();  // update 문 실행
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        }
+        finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+    }
+    
     
     /**
      * 주어진 postId에 해당하는 게시글을 삭제.
