@@ -37,25 +37,24 @@
 	}
 </style>
 <script>
-function clickBookmarkOn() {
-	var bookmarkOn = document.getElementById("bookmarkOn");
-	var bookmarkOff = document.getElementById("bookmarkOff");
-	bookmarkOn.style.display = 'none';
-
-	bookmarkOff.style.display = '';
-
+function clickBookmarkOn(postId) {
+    var bookmarkOn = document.getElementById("bookmarkOn" + postId);
+    var bookmarkOff = document.getElementById("bookmarkOff" + postId);
+    bookmarkOn.style.display = 'none';
+    bookmarkOff.style.display = '';
 }
-function clickBookmarkOff() {
-	var bookmarkOn = document.getElementById("bookmarkOn");
-	var bookmarkOff = document.getElementById("bookmarkOff");
-	bookmarkOff.style.display = 'none';
-	bookmarkOn.style.display = '';
+
+function clickBookmarkOff(postId) {
+    var bookmarkOn = document.getElementById("bookmarkOn" + postId);
+    var bookmarkOff = document.getElementById("bookmarkOff" + postId);
+    bookmarkOff.style.display = 'none';
+    bookmarkOn.style.display = '';
 }
 </script>
 </head>
 <body>
 	<!-- 리스트 반복 -->
- 	<c:forEach var="post" items="${postList}" > 
+ 	<c:forEach var="post" items="${postList}" varStatus="loop">> 
  		<!-- 포스트 요소들 분리시켜줌, margin:auto; 적용하면 반응형 됨 -->
 		<div class="post-list" style="height:300px; width:1500px; margin:auto; left: 50px; position: relative;"> 
 			<!-- 리스트 하나의 전체적인 위치인듯 -->
@@ -80,20 +79,26 @@ function clickBookmarkOff() {
 				</span>
 				
 				<div style="position: absolute; left: 900px; top: 45px;">
-					<!-- 장소 -->
-					<div style="position:absolute; left:100px; top: 10px;">
-						<img src="${pageContext.request.contextPath}/images/location.png" style="left:100px;"/>
+					<!-- 지도마커 표시 -->
+					<div style="position:absolute; width:100px; left:60px; top: 10px;">
+						<svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+							style="width: 34px; height: 34px; position: absolute;"
+							preserveAspectRatio="none">
+			          			<path d="M19.4565 30.906C23.1604 27.6462 29.75 20.9865 29.75 14.875C29.75 11.4935 28.4067 8.25048 26.0156 5.85939C23.6245 3.4683 20.3815 2.125 17 2.125C13.6185 2.125 10.3755 3.4683 7.98439 5.85939C5.5933 8.25048 4.25 11.4935 4.25 14.875C4.25 20.9865 10.8375 27.6462 14.5435 30.906C15.2195 31.5094 16.0939 31.8428 17 31.8428C17.9061 31.8428 18.7805 31.5094 19.4565 30.906ZM12.75 14.875C12.75 13.7478 13.1978 12.6668 13.9948 11.8698C14.7918 11.0728 15.8728 10.625 17 10.625C18.1272 10.625 19.2082 11.0728 20.0052 11.8698C20.8022 12.6668 21.25 13.7478 21.25 14.875C21.25 16.0022 20.8022 17.0832 20.0052 17.8802C19.2082 18.6772 18.1272 19.125 17 19.125C15.8728 19.125 14.7918 18.6772 13.9948 17.8802C13.1978 17.0832 12.75 16.0022 12.75 14.875Z"
+									fill="#FF7C33"></path>
+			        	</svg>
 					</div>
 					<!-- 북마크 -->
 					<!-- 북마크 이미지 24px로 수정하기 -->
 						<!-- 북마크 전 -->
-						<button id="bookmarkOff" onclick="clickBookmarkOff()" style="position:absolute; left:300px; top: 10px; border:none; background:#fff;">
-							<img src="${pageContext.request.contextPath}/images/bookmark_off.png" />
+						<button id="bookmarkOff${post.postId}" onclick="clickBookmarkOff(${post.postId})" style="position:absolute; width:100px; left:300px; top: 10px; border:none; background:#fff;">
+							<img src="${pageContext.request.contextPath}/images/bookmark_off_small.png" />
 						</button>
 						
 						<!--  북마크 후 -->
-						<button id="bookmarkOn" onclick="clickBookmarkOn()" style="position:absolute; left:300px; top: 10px; border:none; background:#fff;">			
-							<img src="${pageContext.request.contextPath}/images/bookmark_on.png" />
+						<button id="bookmarkOn${post.postId}" onclick="clickBookmarkOn(${post.postId})" style="position:absolute; width:100px; left:300px; top: 10px; border:none; background:#fff;">			
+							<img src="${pageContext.request.contextPath}/images/bookmark_on_small.png" />
 						</button>
 				</div>
 		    </div>
