@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 목록</title>
 
 <style>
 /* a:hover는 a:link, a:visited 뒤에 와야 합니다.

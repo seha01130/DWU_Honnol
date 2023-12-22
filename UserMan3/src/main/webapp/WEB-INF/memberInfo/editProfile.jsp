@@ -80,8 +80,7 @@ $(document).ready(function() {
 <body align="center">
 	<form name="form" method="POST"
 		action="<c:url value='/member/update'/>">
-		<div
-			style="width: 1920px; height: 1080px; position: relative; background: white">
+		<div style="width: 1920px; height: 1080px; position: relative; background: white">
 			<div id="showBothScreens"
 				style="width: 435px; height: 930px; position: relative; background: white">
 				<img
@@ -144,10 +143,9 @@ $(document).ready(function() {
 						${memberInfo.rating}도</div>
 				</div>
 			</div>
-			<div style="left: 300px; top: 0px; position: absolute">
+			<div style="left: 300px; top: -1px; position: absolute">
 
-				<div class="Frame1"
-					style="width: 1149px; height: 240.21px; left: 400px; top: 0px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
+				<div class="Frame1" style="width: 1149px; height: 240.21px; left: 400px; top: -1px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
 					<div id="editProfile"></div>
 					<!-- 커뮤니티 상세 정보가 출력될 영역 -->
 

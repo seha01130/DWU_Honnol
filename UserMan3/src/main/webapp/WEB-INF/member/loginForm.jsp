@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Honnol 로그인</title>
 </head>
 <body>
 <script>

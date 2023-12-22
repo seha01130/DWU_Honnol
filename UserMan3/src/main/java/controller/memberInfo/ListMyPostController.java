@@ -26,6 +26,6 @@ public class ListMyPostController implements Controller {
 		request.setAttribute("postList", postList);
 		
 		log.debug("posts Request : {}", postList);
-		return "/memberInfo/list.jsp";
+		return "/post/list.jsp";
 	}
 }

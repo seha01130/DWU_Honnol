@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Insert title here</title>
+<title>${memberInfo.nickname}님의 마이페이지</title>
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -80,68 +80,66 @@ $(document).ready(function() {
 <body align="center">
 	<form name="form" method="POST"
 		action="<c:url value='/member/update'/>">
-		<div
-			style="width: 1920px; height: 1080px; position: relative; background: white">
-			<div id="showBothScreens"
-				style="width: 435px; height: 930px; position: relative; background: white">
+		<div style="width: 1920px; height: 1080px; position: relative; background: white">
+			<div id="showBothScreens" style="width: 435px; height: 930px; position: relative; background: white">
+			
+				<!-- 프로필 사진 -->
 				<img
 					src="${pageContext.request.contextPath}/upload/${memberInfo.profilePicture}"
 					alt="이미지 안뜸"
 					style="width: 196px; height: 196px; left: 125px; top: 100px; position: absolute; background: #D9D9D9; border-radius: 9999px" />
+				
+				<!-- 닉네임 -->
+				<div style="left: 175px; top: 329px; position: absolute; color: #484848; font-size: 30px; font-family: Inter; font-weight: 700; word-wrap: break-word; text-align: center;">
+					${memberInfo.nickname}
+				</div>
 
-				<div
-					style="left: 155px; top: 329px; position: absolute; color: #484848; font-size: 30px; font-family: Inter; font-weight: 700; word-wrap: break-word; text-align: center;">${memberInfo.nickname}</div>
-
+				<!-- 프로필 수정 버튼 -->
 				<div class="editProfile" id="${memberInfo.memberId}" href="#"
-					style="padding-top: 13px; padding-bottom: 12px; padding-left: 39px; padding-right: 40px; left: 130px; top: 383px; position: absolute; background: white; border-radius: 28px; overflow: hidden; border: 2px #FF7C33 solid; justify-content: center; align-items: center; display: inline-flex">
+					style="padding-top: 13px; padding-bottom: 12px; padding-left: 39px; padding-right: 40px; left: 120px; top: 420px; position: absolute; background: white; border-radius: 28px; overflow: hidden; border: 2px #FF7C33 solid; justify-content: center; align-items: center; display: inline-flex">
 					<input class="Frame24" type="button" value="프로필 수정"
 						style="color: #FF7C33; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word; border: none; background: none; cursor: pointer;">
 				</div>
-				<!-- 버튼크기수정 -->
-
-				<div
-					style="padding-top: 13px; padding-bottom: 12px; padding-left: 51px; padding-right: 51px; left: 130px; top: 829px; position: absolute; background: #FF7C33; border-radius: 28px; overflow: hidden; border: 1px #FF7C33 solid; justify-content: center; align-items: center; display: inline-flex">
+				
+				<!-- 로그아웃 버튼 -->
+				<div style="padding-top: 13px; padding-bottom: 12px; padding-left: 51px; padding-right: 51px; left: 120px; top: 829px; position: absolute; background: #FF7C33; border-radius: 28px; overflow: hidden; border: 1px #FF7C33 solid; justify-content: center; align-items: center; display: inline-flex">
 					<input class="Frame28" type="button" value="로그아웃" onClick=""
 						style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word; border: none; background: none;">
 				</div>
-				<!-- 버튼크기수정 -->
-
-				<div
-					style="height: 95px; padding-top: 33px; padding-bottom: 8px; padding-left: 27px; padding-right: 26px; left: 0px; top: 480px; position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: 30px; display: inline-flex">
+				
+				<!-- 마이페이지 좌측 메뉴 -->
+				<div style="height: 95px; padding-top: 33px; padding-bottom: 8px; padding-left: 27px; padding-right: 26px; left: 0px; top: 470px; position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: 30px; display: inline-flex">
 					<div class="showPostList" id="${memberInfo.memberId}" href="#"
 						style="color: #484848; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">
 						<input class="Frame24" type="button" value="내가 쓴 게시글"
 							style="color: #FF7C33; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word; border: none; background: none; cursor: pointer;" />
 					</div>
-					<div
-						style="width: 382px; height: 0px; border: 0.60px #B6B6B6 solid"></div>
+					<div style="width: 382px; height: 0px; border: 0.60px #B6B6B6 solid"></div>
 				</div>
 
 				<div
-					style="height: 95px; padding-top: 33px; padding-bottom: 8px; padding-left: 27px; padding-right: 26px; left: 0px; top: 575px; position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: 30px; display: inline-flex">
-					<div
-						style="color: #484848; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">내
-						모임</div>
-					<div
-						style="width: 382px; height: 0px; border: 0.60px #B6B6B6 solid"></div>
+					style="height: 95px; padding-top: 33px; padding-bottom: 8px; padding-left: 27px; padding-right: 26px; left: 0px; top: 570px; position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: 30px; display: inline-flex">
+					<div style="color: #484848; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">
+						내 모임
+					</div>
+					<div style="width: 382px; height: 0px; border: 0.60px #B6B6B6 solid"></div>
 				</div>
 
-				<div
-					style="width: 435px; height: 95px; padding-top: 33px; padding-bottom: 38px; left: 0px; top: 670px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
-					<div
-						style="color: #484848; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">북마크한
-						글</div>
+				<div style="width: 435px; height: 95px; padding-top: 33px; padding-bottom: 38px; left: 0px; top: 670px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
+					<div style="color: #484848; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">
+						북마크한 글
+					</div>
 				</div>
 
+				<!-- 매너온도 -->
 				<div style="left: 148px; top: 58px; position: absolute">
 					<div class="FluentTemperature16Filled"
-						style="width: 24px; height: 24px; left: 0px; top: 0px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
+						style="width: 24px; height: 27px; left: 2px; top: 2px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
 						<div style="width: 12px; height: 22.50px; background: #FF7C33"></div>
 					</div>
-
-					<div
-						style="left: 26.40px; top: 2.40px; width: 100px; position: absolute; color: #FF7C33; font-size: 16px; font-family: Inter; font-weight: 700; word-wrap: break-word">매너온도
-						${memberInfo.rating}도</div>
+					<div style="left: 18px; top: -1px; width: 150px; position: absolute; color: #FF7C33; font-size: 23px; font-family: Inter; font-weight: 700; word-wrap: break-word">매너온도
+						${memberInfo.rating}도
+					</div>
 				</div>
 			</div>
 			<div style="left: 300px; top: 0px; position: absolute">
