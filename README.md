@@ -8,7 +8,8 @@
 
 - [`Hszoo`](https://github.com/Hszoo)
 - [`mk-star`](https://github.com/mk-star)
-- [`Seyoung-Moon`](https://github.com/Seyoung-Moon)<br><br>
+- [`Seyoung-Moon`](https://github.com/Seyoung-Moon)
+- [`seha01130`](https://github.com/seha01130)<br><br>
 
 
 > ### Tech Stack 🛠
